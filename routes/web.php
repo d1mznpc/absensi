@@ -2,6 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\Auth\LoginController;
+
+// UI
+Route::get('/signin', function () {
+    return view('pages.auth.signin', ['title' => 'Sign In']);
+})->name('signin');
+
+Route::get('/signup', function () {
+    return view('pages.auth.signup', ['title' => 'Sign Up']);
+})->name('signup');
+
+// PROSES
+Route::post('/signin', [LoginController::class, 'signin'])->name('signin.process');
+Route::post('/signup', [LoginController::class, 'signup'])->name('signup.process');
+
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
 
 // dashboard pages
 Route::get('/', function () {
@@ -47,16 +65,6 @@ Route::get('/line-chart', function () {
 Route::get('/bar-chart', function () {
     return view('pages.chart.bar-chart', ['title' => 'Bar Chart']);
 })->name('bar-chart');
-
-
-// authentication pages
-Route::get('/signin', function () {
-    return view('pages.auth.signin', ['title' => 'Sign In']);
-})->name('signin');
-
-Route::get('/signup', function () {
-    return view('pages.auth.signup', ['title' => 'Sign Up']);
-})->name('signup');
 
 // ui elements pages
 Route::get('/alerts', function () {

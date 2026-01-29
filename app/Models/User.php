@@ -39,9 +39,9 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
-    public function isEmployee()
+    public function isUser()
     {
-        return $this->role === 'employee';
+        return $this->role === 'user';
     }
 
     public function attendances()
