@@ -27,7 +27,7 @@ Route::get('/signup', function () {
 Route::post('/signin', [LoginController::class, 'signin'])->name('signin.process');
 Route::post('/signup', [LoginController::class, 'signup'])->name('signup.process');
 
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 
 // dashboard pages
