@@ -24,7 +24,7 @@ class EmployeeController extends Controller
             'admin' => 'Admin',
         ];
 
-        return view('pages.admin.employees.index', compact('employees', 'editEmployee', 'roles'));
+        return view('pages.admin.employees', compact('employees', 'editEmployee', 'roles'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('employees.index')
+        return redirect()->route('employees')
             ->with('success', 'Karyawan berhasil ditambahkan');
     }
 
@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('employees.index')
+        return redirect()->route('employees')
             ->with('success', 'Data karyawan diperbarui');
     }
 

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     // ============== LOGIN ==============
-    public function signin(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email'    => 'required|email',
@@ -29,26 +29,6 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'Email atau password salah',
         ]);
-    }
-
-    // ============== REGISTER ==============
-    public function signup(Request $request)
-    {
-        $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => 'user',
-        ]);
-
-        return redirect()->route('signin')
-            ->with('success', 'Akun berhasil dibuat');
     }
 
     // ============== LOGOUT ==============

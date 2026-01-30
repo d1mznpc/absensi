@@ -5,35 +5,29 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Livewire\Admin\ShiftManage;
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
     Route::put('/employees/{user}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{user}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+    Route::get('/shifts', ShiftManage::class)->name('shifts');
 });
 
 
 // UI
-Route::get('/signin', function () {
+Route::get('/login', function () {
     return view('pages.auth.signin', ['title' => 'Sign In']);
-})->name('signin');
-
-Route::get('/signup', function () {
-    return view('pages.auth.signup', ['title' => 'Sign Up']);
-})->name('signup');
+})->name('login');
 
 // PROSES
-Route::post('/signin', [LoginController::class, 'signin'])->name('signin.process');
-Route::post('/signup', [LoginController::class, 'signup'])->name('signup.process');
-
+Route::post('/login', [LoginController::class, 'login'])->name('login.process');
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
-
-// dashboard pages
 Route::get('/', function () {
     return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
-})->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 // profile pages
 Route::get('/profile', function () {
