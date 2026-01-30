@@ -49,6 +49,18 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class, 'employee_id');
     }
 
+    public function shifts()
+    {
+        return $this->belongsToMany(Shift::class, 'employee_shift')
+            ->withPivot('shift_date')
+            ->withTimestamps();
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

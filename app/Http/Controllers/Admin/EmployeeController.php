@@ -11,14 +11,20 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        $employees = User::where('role', 'user')->latest()->get();
+        $employees = User::latest()->get();
         $editEmployee = null;
 
         if ($request->has('edit')) {
             $editEmployee = User::findOrFail($request->edit);
         }
 
-        return view('pages.admin.employees.index', compact('employees', 'editEmployee'));
+        // Role options untuk dropdown di form
+        $roles = [
+            'user' => 'User',
+            'admin' => 'Admin',
+        ];
+
+        return view('pages.admin.employees.index', compact('employees', 'editEmployee', 'roles'));
     }
 
     public function store(Request $request)
@@ -27,13 +33,14 @@ class EmployeeController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
+            'role' => 'required|in:user,admin', // validasi role
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user',
+            'role' => $request->role,
         ]);
 
         return redirect()->route('employees.index')
@@ -45,9 +52,14 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|in:user,admin,manager',
         ]);
 
-        $user->update($request->only('name', 'email'));
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
 
         return redirect()->route('employees.index')
             ->with('success', 'Data karyawan diperbarui');
@@ -59,4 +71,3 @@ class EmployeeController extends Controller
         return back()->with('success', 'Karyawan dihapus');
     }
 }
-

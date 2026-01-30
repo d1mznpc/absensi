@@ -12,6 +12,11 @@ class MenuHelper
                 'name' => 'Dashboard',
                 'path' => '/'
             ],
+            [
+                'icon' => 'user-profile',
+                'name' => 'Manage User',
+                'path' => '/admin/employees'
+            ],
             
             [
                 'name' => 'Pages',
