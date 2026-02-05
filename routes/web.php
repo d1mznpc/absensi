@@ -5,14 +5,22 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\EmployeeController;
-use App\Http\Livewire\Admin\ShiftManage;
+use App\Http\Controllers\Admin\ShiftController;
+use App\Http\Controllers\Admin\EmployeeShiftController;
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
     Route::put('/employees/{user}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{user}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
-    Route::get('/shifts', ShiftManage::class)->name('shifts');
+    Route::get('/shifts', [ShiftController::class, 'index'])->name('shifts.index');
+    Route::post('/shifts', [ShiftController::class, 'store'])->name('shifts.store');
+    Route::put('/shifts/{shift}', [ShiftController::class, 'update'])->name('shifts.update');
+    Route::delete('/shifts/{shift}', [ShiftController::class, 'destroy'])->name('shifts.destroy');
+    Route::get('/employee-shifts', [EmployeeShiftController::class, 'index'])->name('employee-shifts.index');
+    Route::post('/employee-shifts', [EmployeeShiftController::class, 'store'])->name('employee-shifts.store');
+    Route::put('/employee-shifts/{employeeShift}', [EmployeeShiftController::class, 'update'])->name('employee-shifts.update');
+    Route::delete('/employee-shifts/{employeeShift}', [EmployeeShiftController::class, 'destroy'])->name('employee-shifts.destroy');
 });
 
 

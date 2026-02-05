@@ -17,14 +17,10 @@ class MenuHelper
                 'name' => 'Manage User',
                 'path' => '/admin/employees'
             ],
-            
             [
-                'name' => 'Pages',
-                'icon' => 'pages',
-                'subItems' => [
-                    // ['name' => 'Blank Page', 'path' => '/blank', 'pro' => false],
-                    ['name' => '404 Error', 'path' => '/error-404', 'pro' => false]
-                ],
+                'icon' => 'calendar',
+                'name' => 'Manage Shift',
+                'path' => '/admin/shifts'
             ],
         ];
     }
@@ -36,8 +32,7 @@ class MenuHelper
                 'icon' => 'authentication',
                 'name' => 'Authentication',
                 'subItems' => [
-                    ['name' => 'Sign In', 'path' => '/signin', 'pro' => false],
-                    ['name' => 'Sign Up', 'path' => '/signup', 'pro' => false],
+                    ['name' => 'Sign In', 'path' => '/login', 'pro' => false],
                 ],
             ],
         ];

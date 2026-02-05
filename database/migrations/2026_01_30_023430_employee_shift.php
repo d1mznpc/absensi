@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('shift_id')->constrained('shifts')->onDelete('cascade');
-            $table->date('shift_date'); // Kalau ingin shift spesifik per tanggal
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
