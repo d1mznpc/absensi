@@ -8,14 +8,12 @@ class Shift extends Model
 {
     protected $fillable = [
         'name',
-        'start_time', 
+        'start_time',
         'end_time',
     ];
 
-    public function users()
+    public function employeeShifts()
     {
-        return $this->belongsToMany(User::class, 'employee_shift')
-                    ->withPivot('shift_date')
-                    ->withTimestamps();
+        return $this->hasMany(EmployeeShift::class);
     }
 }

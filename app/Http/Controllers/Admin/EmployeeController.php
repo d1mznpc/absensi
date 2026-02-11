@@ -33,7 +33,7 @@ class EmployeeController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'role' => 'required|in:user,admin', // validasi role
+            'role' => 'required|in:user,admin',
         ]);
 
         User::create([
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('employees')
+        return redirect()->route('employees.index')
             ->with('success', 'Karyawan berhasil ditambahkan');
     }
 
@@ -52,7 +52,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'role' => 'required|in:user,admin,manager',
+            'role' => 'required|in:user,admin',
         ]);
 
         $user->update([
@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('employees')
+        return redirect()->route('employees.index')
             ->with('success', 'Data karyawan diperbarui');
     }
 

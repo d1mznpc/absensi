@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UserSeeder::class);
+        $this->call(QrCodeSeeder::class);
+        $this->call(OfficeLocationSeeder::class);
     }
 }

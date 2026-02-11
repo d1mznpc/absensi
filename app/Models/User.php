@@ -49,11 +49,9 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class, 'employee_id');
     }
 
-    public function shifts()
+    public function employeeShifts()
     {
-        return $this->belongsToMany(Shift::class, 'employee_shift')
-            ->withPivot('shift_date')
-            ->withTimestamps();
+        return $this->hasMany(EmployeeShift::class);
     }
 
     public function leaveRequests()

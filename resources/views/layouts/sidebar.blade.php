@@ -194,7 +194,7 @@ $currentPath = request()->path();
 
                                     @if(Str::startsWith($item['icon'], 'fa-'))
                                     {{-- FONT AWESOME --}}
-                                    <i class="{{ $item['icon'] }} text-lg"></i>
+                                    <i class="ml-1 {{ $item['icon'] }} text-lg"></i>
                                     @else
                                     {{-- TAILADMIN SVG --}}
                                     {!! MenuHelper::getIconSvg($item['icon']) !!}

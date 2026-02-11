@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\EmployeeShiftController;
+use App\Models\QrCode;
+use App\Http\Controllers\AttendanceHistoryController;
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
@@ -21,8 +23,20 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/employee-shifts', [EmployeeShiftController::class, 'store'])->name('employee-shifts.store');
     Route::put('/employee-shifts/{employeeShift}', [EmployeeShiftController::class, 'update'])->name('employee-shifts.update');
     Route::delete('/employee-shifts/{employeeShift}', [EmployeeShiftController::class, 'destroy'])->name('employee-shifts.destroy');
+    Route::get('/qr-dinamis', function () {
+        $qr = \App\Models\QrCode::firstOrFail();
+        return view('pages.admin.qr-dinamis', compact('qr'));
+    });
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/attendance/history', [AttendanceHistoryController::class, 'index'])->name('attendance.history');
+});
+Route::middleware(['auth'])->post('/absen', [AttendanceController::class, 'scan'])
+    ->name('absen.scan');
+Route::middleware('auth')->get('/scan-absensi', function () {
+    return view('pages.employee.scan_absensi');
+})->name('absen.scan.page');
 
 // UI
 Route::get('/login', function () {

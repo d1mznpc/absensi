@@ -22,6 +22,26 @@ class MenuHelper
                 'name' => 'Manage Shift',
                 'path' => '/admin/shifts'
             ],
+            [
+                'icon' => 'fa-regular fa-clock',
+                'name' => 'Employee Shift',
+                'path' => '/admin/employee-shifts'
+            ],
+            [
+                'icon' => 'fa-solid fa-qrcode',
+                'name' => 'Qr Dinamis',
+                'path' => '/admin/qr-dinamis'
+            ],
+            [
+                'icon' => 'fa-regular fa-camera',
+                'name' => 'Scan QR',
+                'path' => '/scan-absensi'
+            ],
+            [
+                'icon' => 'fa-regular fa-camera',
+                'name' => 'Attendance History',
+                'path' => '/attendance/history'
+            ],
         ];
     }
 
